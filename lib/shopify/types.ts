@@ -1,25 +1,25 @@
 export type Maybe<T> = T | null;
 
-export type Connection<T> = {
-  edges: Array<Edge<T>>;
-};
+export interface Connection<T> {
+  edges: Edge<T>[];
+}
 
-export type Edge<T> = {
+export interface Edge<T> {
   node: T;
-};
+}
 
-export type Cart = Omit<ShopifyCart, 'lines'> & {
+export type Cart = Omit<ShopifyCart, "lines"> & {
   lines: CartItem[];
 };
 
-export type CartProduct = {
+export interface CartProduct {
   id: string;
   handle: string;
   title: string;
   featuredImage: Image;
-};
+}
 
-export type CartItem = {
+export interface CartItem {
   id: string | undefined;
   quantity: number;
   cost: {
@@ -34,30 +34,30 @@ export type CartItem = {
     }[];
     product: CartProduct;
   };
-};
+}
 
 export type Collection = ShopifyCollection & {
   path: string;
 };
 
-export type Image = {
+export interface Image {
   url: string;
   altText: string;
   width: number;
   height: number;
-};
+}
 
-export type Menu = {
+export interface Menu {
   title: string;
   path: string;
-};
+}
 
-export type Money = {
+export interface Money {
   amount: string;
   currencyCode: string;
-};
+}
 
-export type Page = {
+export interface Page {
   id: string;
   title: string;
   handle: string;
@@ -66,20 +66,20 @@ export type Page = {
   seo?: SEO;
   createdAt: string;
   updatedAt: string;
-};
+}
 
-export type Product = Omit<ShopifyProduct, 'variants' | 'images'> & {
+export type Product = Omit<ShopifyProduct, "variants" | "images"> & {
   variants: ProductVariant[];
   images: Image[];
 };
 
-export type ProductOption = {
+export interface ProductOption {
   id: string;
   name: string;
   values: string[];
-};
+}
 
-export type ProductVariant = {
+export interface ProductVariant {
   id: string;
   title: string;
   availableForSale: boolean;
@@ -88,14 +88,14 @@ export type ProductVariant = {
     value: string;
   }[];
   price: Money;
-};
+}
 
-export type SEO = {
+export interface SEO {
   title: string;
   description: string;
-};
+}
 
-export type ShopifyCart = {
+export interface ShopifyCart {
   id: string | undefined;
   checkoutUrl: string;
   cost: {
@@ -105,17 +105,17 @@ export type ShopifyCart = {
   };
   lines: Connection<CartItem>;
   totalQuantity: number;
-};
+}
 
-export type ShopifyCollection = {
+export interface ShopifyCollection {
   handle: string;
   title: string;
   description: string;
   seo: SEO;
   updatedAt: string;
-};
+}
 
-export type ShopifyProduct = {
+export interface ShopifyProduct {
   id: string;
   handle: string;
   availableForSale: boolean;
@@ -133,22 +133,22 @@ export type ShopifyProduct = {
   seo: SEO;
   tags: string[];
   updatedAt: string;
-};
+}
 
-export type ShopifyCartOperation = {
+export interface ShopifyCartOperation {
   data: {
     cart: ShopifyCart;
   };
   variables: {
     cartId: string;
   };
-};
+}
 
-export type ShopifyCreateCartOperation = {
+export interface ShopifyCreateCartOperation {
   data: { cartCreate: { cart: ShopifyCart } };
-};
+}
 
-export type ShopifyAddToCartOperation = {
+export interface ShopifyAddToCartOperation {
   data: {
     cartLinesAdd: {
       cart: ShopifyCart;
@@ -161,9 +161,9 @@ export type ShopifyAddToCartOperation = {
       quantity: number;
     }[];
   };
-};
+}
 
-export type ShopifyRemoveFromCartOperation = {
+export interface ShopifyRemoveFromCartOperation {
   data: {
     cartLinesRemove: {
       cart: ShopifyCart;
@@ -173,9 +173,9 @@ export type ShopifyRemoveFromCartOperation = {
     cartId: string;
     lineIds: string[];
   };
-};
+}
 
-export type ShopifyUpdateCartOperation = {
+export interface ShopifyUpdateCartOperation {
   data: {
     cartLinesUpdate: {
       cart: ShopifyCart;
@@ -189,18 +189,18 @@ export type ShopifyUpdateCartOperation = {
       quantity: number;
     }[];
   };
-};
+}
 
-export type ShopifyCollectionOperation = {
+export interface ShopifyCollectionOperation {
   data: {
     collection: ShopifyCollection;
   };
   variables: {
     handle: string;
   };
-};
+}
 
-export type ShopifyCollectionProductsOperation = {
+export interface ShopifyCollectionProductsOperation {
   data: {
     collection: {
       products: Connection<ShopifyProduct>;
@@ -211,15 +211,15 @@ export type ShopifyCollectionProductsOperation = {
     reverse?: boolean;
     sortKey?: string;
   };
-};
+}
 
-export type ShopifyCollectionsOperation = {
+export interface ShopifyCollectionsOperation {
   data: {
     collections: Connection<ShopifyCollection>;
   };
-};
+}
 
-export type ShopifyMenuOperation = {
+export interface ShopifyMenuOperation {
   data: {
     menu?: {
       items: {
@@ -231,36 +231,36 @@ export type ShopifyMenuOperation = {
   variables: {
     handle: string;
   };
-};
+}
 
-export type ShopifyPageOperation = {
+export interface ShopifyPageOperation {
   data: { pageByHandle: Page };
   variables: { handle: string };
-};
+}
 
-export type ShopifyPagesOperation = {
+export interface ShopifyPagesOperation {
   data: {
     pages: Connection<Page>;
   };
-};
+}
 
-export type ShopifyProductOperation = {
+export interface ShopifyProductOperation {
   data: { product: ShopifyProduct };
   variables: {
     handle: string;
   };
-};
+}
 
-export type ShopifyProductRecommendationsOperation = {
+export interface ShopifyProductRecommendationsOperation {
   data: {
     productRecommendations: ShopifyProduct[];
   };
   variables: {
     productId: string;
   };
-};
+}
 
-export type ShopifyProductsOperation = {
+export interface ShopifyProductsOperation {
   data: {
     products: Connection<ShopifyProduct>;
   };
@@ -269,4 +269,4 @@ export type ShopifyProductsOperation = {
     reverse?: boolean;
     sortKey?: string;
   };
-};
+}
