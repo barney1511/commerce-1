@@ -22,7 +22,7 @@ function ThreeItemGridItem({
     >
       <Link
         className="relative block aspect-square h-full w-full"
-        href={`/app/(app)/product/${item.handle}`}
+        href={`/product/${item.handle}`}
         prefetch={true}
       >
         <GridTileImage
@@ -47,12 +47,11 @@ function ThreeItemGridItem({
   );
 }
 
-export async function ThreeItemGrid() {
-  // Collections that start with `hidden-*` are hidden from the search page.
-  const homepageItems = await getCollectionProducts({
-    collection: "hidden-homepage-featured-items",
-  });
-
+export async function ThreeItemGrid({
+  homepageItems,
+}: {
+  homepageItems: Product[];
+}) {
   if (!homepageItems[0] || !homepageItems[1] || !homepageItems[2]) return null;
 
   const [firstProduct, secondProduct, thirdProduct] = homepageItems;

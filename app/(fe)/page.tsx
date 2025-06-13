@@ -1,6 +1,8 @@
 import { Carousel } from "components/carousel";
 import { ThreeItemGrid } from "components/grid/three-items";
 import Footer from "components/layout/footer";
+import GalleryHero from "@/components/3js/3d-hero-section";
+import { getCollectionProducts } from "@/lib/shopify";
 
 export const metadata = {
   description:
@@ -10,10 +12,14 @@ export const metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const homepageItems = await getCollectionProducts({
+    collection: "hidden-homepage-featured-items",
+  });
   return (
     <>
-      <ThreeItemGrid />
+      <GalleryHero homepageItems={homepageItems} />
+      {/*<ThreeItemGrid homepageItems={homepageItems} />*/}
       <Carousel />
       <Footer />
     </>

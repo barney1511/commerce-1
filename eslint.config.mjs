@@ -6,6 +6,7 @@ import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 import reactPlugin from "eslint-plugin-react";
 import hooksPlugin from "eslint-plugin-react-hooks";
 import reactCompiler from "eslint-plugin-react-compiler";
+import reactThreeFiber from "@react-three/eslint-plugin"
 
 export default tseslint.config(
   {
@@ -84,4 +85,12 @@ export default tseslint.config(
       "react-compiler/react-compiler": "error",
     },
   },
+  {
+    plugins: {
+      "react-three-fiber": reactThreeFiber,
+    },
+    rules: {
+      ...reactThreeFiber.configs.recommended.rules,
+    },
+  }
 );
